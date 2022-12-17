@@ -40,24 +40,23 @@ carlos = create_passport(
 
 
 def add_biometric_data(citizen, type_biosimetric, value, date):
-    print('checking', citizen)
-    citizen['biometric'] = {}
-    data = {
-        type_biosimetric: {
+    data = {type_biosimetric: {
             'date': date,
             'value': value,
-        },
-    }
-    citizen['biometric'].update(data)
-    return citizen
+            }
+            }
+    if citizen.get('biosemtric') is None:
+        citizen['biosemtric'] = data
+        return citizen
+    else:
+        citizen['biosemtric'].update(data)
+        return citizen
 
 
 carlos = add_biometric_data(carlos, "eye_color_left", "blue", "2020-05-05")
-print('Carlos 1\n:', carlos)
 carlos = add_biometric_data(carlos, "eye_color_right", "blue", "2020-05-05")
-print('Carlos 2\n:', carlos)
 carlos = add_biometric_data(carlos, "eye_color_left", "brown", "2022-01-10")
-print('Carlos 3\n:', carlos)
+
 
 fingerprint_data = {
     "left_pinky": "2378945",
@@ -77,16 +76,16 @@ fingerprint_data = {
 carlos = add_biometric_data(carlos, 'finger_prints', fingerprint_data,
                             "2022-01-12")
 
-print('Carlos 4\n:', carlos)
 
 if __name__ == "__main__":
     countries = get_countries()
 
 # print(countries)
-# print("passport\n:", create_passport(
-    # 'Carlos', '1980-01-31', 'Cienfuegos', 1.76, 'Cuba'))
-# print('new country', add_stamp('USA'))
+print("passport\n:", create_passport(
+    'Carlos', '1980-01-31', 'Cienfuegos', 1.76, 'Cuba'))
 
-# print('already visited:', add_stamp('Peru'))
+print('new country', add_stamp('USA'))
+print('already visited:', add_stamp('Peru'))
+print('origin cuntry:', add_stamp('Cuba'))
 
-# print('origin cuntry:', add_stamp('Cuba'))
+print('checking', carlos)
